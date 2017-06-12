@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facebook Explorer Playground</title>
+	<meta name="author" content="your name" />
+	<meta name="description" content="" />
+	
+	<link rel="stylesheet" href="example.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet" type="text/css">
+    
+    <script src="https://connect.facebook.net/en_US/sdk.js?version=v2.9"></script>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../node_modules/bluebird/js/browser/bluebird.js"></script>
+    <script src="../node_modules/lodash/lodash.js"></script>
+</head>
+<body>
+<script src="../build/facebook.explorer.js"></script>
+<script>
+    Promise.config({
+        warnings: true,
+        longStackTraces: true,
+        cancellation: true,
+        monitoring: true
+    });
+    
+    FBExplorer.init({
+        appId: "1088088464577883",
+        version: "v2.9",
+        profile: "brief",
+        dayRangeLimit: 50
+    });
+    
+    FBExplorer.findPlaces({
+        keywords: "",
+        center: {
+            latitude: 51.7591,
+            longitude: 19.4556
+        },
+        distance: 60,
+        profile: "extended",
+        sort: "distance",
+        order: "asc"
+    })
+    .bind(this)
+    .then(function(result) {
+        console.log(result);
+    });
+    
+    FBExplorer.findEvents({
+        center: {
+            latitude: 51.7591,
+            longitude: 19.4556
+        },
+        distance: 100,
+        profile: "brief",
+        sort: "time",
+        order: "desc"
+    })
+    .bind(this)
+    .then(function(result) {
+        console.log(result);
+    });
+</script>
+</body>
+</html>
