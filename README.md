@@ -1,5 +1,5 @@
 # facebook-explorer
-Library for performing various searches on Facebook (using [Facebook Graph API](https://developers.facebook.com/docs/graph-api)).
+Promise based library for performing various searches on Facebook (using [Facebook Graph API](https://developers.facebook.com/docs/graph-api)).
 It utilizes various optimisation techniques to limit number of requests and amount of transfered data to minimum.
 
 ## Table of contents
