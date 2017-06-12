@@ -1,6 +1,6 @@
 {
   "name": "facebook-explorer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Javascript library for performing various searches using Facebook API",
   "main": "src/main.js",
   "keywords": [
@@ -15,8 +15,8 @@
   ],
   "author": "karenpommeroy <mkarpins@gmail.com>",
   "repository": {
-	"type" : "git",
-	"url" : "https://github.com/karenpommeroy/facebook-explorer"
+    "type": "git",
+    "url": "https://github.com/karenpommeroy/facebook-explorer"
   },
   "license": "MIT",
   "devDependencies": {
