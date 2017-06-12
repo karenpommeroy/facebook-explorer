@@ -74,13 +74,13 @@
                     "id", "name"
                 ],
                 "brief": [
-                    "id", "name"
+                    "category", "cover", "description", "id", "location", "name"
                 ],
                 "extended": [
-                    "id", "name"
+                    "category", "contact_address", "cover", "description", "fan_count", "featured_video", "founded", "id", "location", "name", "talking_about_count", "website"
                 ],
                 "full": [
-                    "id", "name"
+                    "about", "app_links", "best_page", "can_checkin", "category", "category_list", "contact_address", "cover", "description", "display_subtext", "emails", "fan_count", "featured_video", "founded", "general_info", "id", "impressum", "is_community_page", "is_verified", "link", "location", "name", "overall_star_rating", "parent_page", "phone", "rating_count", "start_info", "supports_instant_articles", "talking_about_count", "website", "were_here_count"
                 ]
             },
             place: {
@@ -324,15 +324,15 @@
         
         __sortByDistance: function(items, order, center) {
             return items.sort(function(a, b) {
-                var pointA = a && (a.location || a.place.location),
-                    pointB = b && (b.location || b.place.location);
+                var pointA = a && (a.location || (a.place && a.place.location)),
+                    pointB = b && (b.location || (b.place && b.place.location));
                 
                 if (!pointA && !pointB) return 0;            
                 if (!pointA) return -1;
                 if (!pointB) return 1;
                 
-                var distanceA = this.__calculateDistance(center, a.location || a.place.location),
-                    distanceB = this.__calculateDistance(center, b.location || b.place.location);
+                var distanceA = this.__calculateDistance(center, pointA),
+                    distanceB = this.__calculateDistance(center, pointB);
                     
                 return order === Dict.order.ASC ? distanceA - distanceB : distanceB - distanceA; 
             }.bind(this));

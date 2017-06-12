@@ -37,13 +37,13 @@
                     "id", "name"
                 ],
                 "brief": [
-                    "id", "name"
+                    "category", "cover", "description", "id", "location", "name"
                 ],
                 "extended": [
-                    "id", "name"
+                    "category", "contact_address", "cover", "description", "fan_count", "featured_video", "founded", "id", "location", "name", "talking_about_count", "website"
                 ],
                 "full": [
-                    "id", "name"
+                    "about", "app_links", "best_page", "can_checkin", "category", "category_list", "contact_address", "cover", "description", "display_subtext", "emails", "fan_count", "featured_video", "founded", "general_info", "id", "impressum", "is_community_page", "is_verified", "link", "location", "name", "overall_star_rating", "parent_page", "phone", "rating_count", "start_info", "supports_instant_articles", "talking_about_count", "website", "were_here_count"
                 ]
             },
             place: {

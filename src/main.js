@@ -205,15 +205,15 @@
         
         __sortByDistance: function(items, order, center) {
             return items.sort(function(a, b) {
-                var pointA = a && (a.location || a.place.location),
-                    pointB = b && (b.location || b.place.location);
+                var pointA = a && (a.location || (a.place && a.place.location)),
+                    pointB = b && (b.location || (b.place && b.place.location));
                 
                 if (!pointA && !pointB) return 0;            
                 if (!pointA) return -1;
                 if (!pointB) return 1;
                 
-                var distanceA = this.__calculateDistance(center, a.location || a.place.location),
-                    distanceB = this.__calculateDistance(center, b.location || b.place.location);
+                var distanceA = this.__calculateDistance(center, pointA),
+                    distanceB = this.__calculateDistance(center, pointB);
                     
                 return order === Dict.order.ASC ? distanceA - distanceB : distanceB - distanceA; 
             }.bind(this));
