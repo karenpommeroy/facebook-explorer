@@ -87,8 +87,8 @@ Option          | Type    | Description                                         
 appId           | string  | Facebook Application ID                              |         |
 version         | string  | Facebook Graph API version to use                    | "v2.9"  |
 profile         | string  | Name of the default search profile (explained below) | "brief" | "basic", "brief", "extended", "full"
-lowerTimeLimit  | string  | Default lower limit for time based searches (in days)| "now"   |
-timeRangeInDays | int     | Default upper limit for time based searches (in days)| 30      |
+since           | string  | Default lower limit for time based searches          | "now"   |
+days            | int     | Default upper limit for time based searches (in days)| 30      |
 
 #### Search profiles
 
@@ -147,7 +147,7 @@ FBExplorer.init({
     version: "v2.9",
     profile: "brief"
     since: "now",
-    timeRangeInDays: 30
+    days: 30
 });
 ```
 
