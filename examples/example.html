@@ -18,50 +18,52 @@
 <body>
 <script src="../build/facebook.explorer.js"></script>
 <script>
-    Promise.config({
-        warnings: true,
-        longStackTraces: true,
-        cancellation: true,
-        monitoring: true
-    });
-    
+    var t0, t1, t2, t3, t4, t5;    
     FBExplorer.init({
         appId: "1088088464577883",
-        version: "v2.9",
-        profile: "brief",
-        dayRangeLimit: 50
+        days: 10
     });
-    
-    FBExplorer.findPlaces({
-        keywords: "",
-        center: {
-            latitude: 51.7591,
-            longitude: 19.4556
-        },
-        distance: 60,
+
+	t0 = performance.now();
+	FBExplorer.findEvents({       
         profile: "extended",
-        sort: "distance",
-        order: "asc"
+		cityId: 2674141,
+		method: "multiple"
     })
     .bind(this)
     .then(function(result) {
-        console.log(result);
-    });
-    
-    FBExplorer.findEvents({
-        center: {
-            latitude: 51.7591,
-            longitude: 19.4556
-        },
-        distance: 100,
-        profile: "brief",
-        sort: "time",
-        order: "desc"
+		t1 = performance.now();
+		console.log("Search using multiple requests elapsed: " + (t1 - t0) + " milliseconds.")
+        console.log("Total results: " + result.length);
     })
-    .bind(this)
-    .then(function(result) {
-        console.log(result);
-    });
+	.then(function(result) {
+		t2 = performance.now();
+		return FBExplorer.findEvents({       
+			profile: "extended",
+			cityId: 2674141,
+			method: "least"
+		})
+		.bind(this)
+		.then(function(result) {
+			t3 = performance.now();
+			console.log("Search using least requests elapsed: " + (t3 - t2) + " milliseconds.")
+			console.log("Total results: " + result.length);
+		});
+	})
+	.then(function(result) {
+		t4 = performance.now();
+		return FBExplorer.findEvents({       
+			profile: "extended",
+			cityId: 2674141,
+			method: "chunked"
+		})
+		.bind(this)
+		.then(function(result) {
+			t5 = performance.now();
+			console.log("Search using chunked requests elapsed: " + (t5 - t4) + " milliseconds.")
+			console.log("Total results: " + result.length);
+		});
+	});
 </script>
 </body>
 </html>

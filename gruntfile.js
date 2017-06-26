@@ -37,17 +37,6 @@ module.exports = function(grunt) {
             }
         },
         
-        downloadfile: {
-            files: [
-                {
-                    url: "https://connect.facebook.net/en_US/sdk.js?version=v2.9",
-                    dest: "lib/",
-                    name: "facebook.sdk.js",
-                    overwrite: false
-                }
-            ]
-        },
-        
         _clean: {
             build: {
                 src: ["build/"]
@@ -57,12 +46,11 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-downloadfile');
     grunt.loadNpmTasks('grunt-umd');
     grunt.renameTask("clean", "_clean");
 
     var cleanTask = ["_clean"];
-    var buildTask = ["_clean", "downloadfile", "umd", "uglify"];
+    var buildTask = ["_clean", "umd", "uglify"];
     
     grunt.registerTask("default", buildTask);
     grunt.registerTask("clean", cleanTask);
