@@ -10,7 +10,7 @@
     // like Node.
     module.exports = factory(require("bluebird"),require("facebook"),require("lodash"));
   } else {
-    root['FBExplorer'] = factory(root["bluebird"],root["facebook"],root["lodash"]);
+    root['FBExplorer'] = factory(root["Promise"],root["FB"],root["_"]);
   }
 }(this, function (Promise, FB, _) {
 

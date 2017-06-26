@@ -11,7 +11,8 @@ module.exports = function(grunt) {
                             { "bluebird": "Promise" },
                             { "facebook": "FB" },
                             { "lodash": "_" }
-                        ]
+                        ],
+                        global: ["Promise", "FB", "_"]
                     }
                 }
             }
