@@ -89,6 +89,8 @@ version         | string  | Facebook Graph API version to use                   
 profile         | string  | Name of the default search profile (explained below) | "brief" | "basic", "brief", "extended", "full"
 since           | string  | Default lower limit for time based searches          | "now"   |
 days            | int     | Default upper limit for time based searches (in days)| 30      |
+method          | string  | Default algorithm used when searching for events     | "chunk" | "chunk", "multiple", "least"
+limit           | int     | Default limit for Facebook API requests              | 100	   |
 
 #### Search profiles
 
@@ -179,7 +181,8 @@ var searchOptions = {
     profile: "brief",
     until: "2017-12-02",
     sort: "time",
-    order: "asc"
+    order: "asc",
+    methid: "multiple"
 };
 
 function partialResultsCallback(result, hasMore) {
@@ -261,6 +264,7 @@ Option    | Type    | Description                                               
 --------- | ------- | --------------------------------------------------------------- | ------------------------------
 center    | object  | Center point containing latitude (float) and longitude (float)  | Coordinates in EPSG:4326
 distance  | int     | Search radius, distance from center (in metres)                 | Shouldn't exceed 50000
+cityId    | string  | City id as defined by Facebook				                  |
 
 Below options are available only when searching only for events.
 
@@ -268,6 +272,32 @@ Option    | Type    | Description                                           | De
 --------- | ------- | ----------------------------------------------------- | --------------------------------
 since     | string  | Lower time boundary, Unix timestamp or strtotime data value as accepted by [FB Graph API](https://developers.facebook.com/docs/graph-api/using-graph-api#time).        	| Default is "now"
 until     | string  | Upper time boundary, Unix timestamp or strtotime data value as accepted by [FB Graph API](https://developers.facebook.com/docs/graph-api/using-graph-api#time).        	|
+method    | string  | Type of search algorithm to use							 | check [SearchAlgorithms(Search Algorithms)
+
+#### Search algorithms
+After Facebook deprecated FQL support (since v2.1) searching for events by location became a little bit tricky.
+There are number of ways that such a search can be approached using FB Graph API alone and because of that `facebook-explorer` allows you to choose between three different algorithms.
+Each one has it's advantages and disadvantages and execution time can differ significantly under specific conditions.
+
+
+**Least number of requests ("least")** - performs search using the least amount of requests possible but each response can be very large
+
+- search for places according to search parameters
+- include events information in response (using nested queries)
+
+**Multiple small requests ("multiple")** - performs many smaller requests, each response is optimized in size
+
+- search for places according to search parameters
+- make a separate request for each place to obtain associated events data
+
+**Chunked requests ("chunked")** - this one falls somewhere in between the above utilizing nested queries
+
+- search for places according to search parameters
+- make request for events from multiple places at once (combining up to 50 places per one request)
+
+I noticed that sometimes a place may contain events that are hosted elsewhere (place location is different than the event location). Such events are filtered out if their location does not match specified search parameters.
+
+Each algorithm removes duplicates before returning the results.
 
 #### Sorting
 
@@ -296,7 +326,6 @@ function partialResultsCallback(Array result, bool hasMore) {
 This is called a partial result callback and will be called each time a new portion of data is available without having to wait for the complete item.
 First parameter contains new portion of data that was returned in the current search and second informs you if there will be more data available.
 This way it is for example possible to display some data imemdiately once it appears and load remaining in the background.
-
 
 ## Known limitations
 
