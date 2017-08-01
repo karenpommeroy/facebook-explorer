@@ -55,7 +55,7 @@ var enums = {
             ],
             "full": [
                 "attending_count", "can_guests_invite", "can_viewer_post", "category", "cover", "declined_count", "description",
-				"end_time", "id", "interested_count", "is_cancelled", "is_draft", "is_page_owned", "is_viewer_admin", "maybe_count",
+				"end_time", "id", "interested_count", "is_canceled", "is_draft", "is_page_owned", "is_viewer_admin", "maybe_count",
 				"name", "noreply_count", "owner", "parent_group", "place{id,name,location{city,city_id,country,latitude,longitude,street,zip}}",
 				"start_time", "ticket_uri", "timezone", "type", "updated_time"
             ]
