@@ -34,8 +34,8 @@ var enums = {
                 "category", "cover", "description", "id", "end_time", "name", "place{id,name,location{city,city_id,country,latitude,longitude,street,zip}}", "start_time"
             ],
             "extended": [
-                "attending_count", "category", "cover", "description", "id", "interested_count", "end_time", "maybe_count", "name",
-				"place{id,name,location{city,city_id,country,latitude,longitude,street,zip}}", "start_time", "type"
+                "attending_count", "category", "cover", "description", "id", "interested_count", "end_time", "maybe_count", "name", "owner{name,emails,contact_address,link}", "place{id,name,location{city,city_id,country,latitude,longitude,street,zip}}",
+                "start_time", "type"
             ],
             "full": [
                 "attending_count", "can_guests_invite", "can_viewer_post", "category", "cover", "declined_count", "description",
