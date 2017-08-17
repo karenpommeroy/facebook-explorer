@@ -6,23 +6,23 @@
 	<meta name="description" content="" />
 	
 	<link rel="stylesheet" href="example.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet" type="text/css">
     
     <script src="https://connect.facebook.net/en_US/sdk.js?version=v2.9"></script>
-    <script src="../node_modules/jquery/dist/jquery.js"></script>
-    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script src="../node_modules/bluebird/js/browser/bluebird.js"></script>
     <script src="../node_modules/lodash/lodash.js"></script>
 </head>
 <body>
+    <div class="output"></div>
 <script src="../build/facebook.explorer.js"></script>
 <script>
-    var t0, t1, t2, t3, t4, t5;    
+    var t0, t1, t2, t3, t4, t5;
+    var output = document.querySelector(".output");
     FBExplorer.init({
-        appId: "1088088464577883",
+        appId: "INSERT_YOUR_ID_HERE",
         days: 10
     });
+    output.innerHTML +="Searching...<br /><br />";
 
 	t0 = performance.now();
 	FBExplorer.findEvents({       
@@ -33,8 +33,8 @@
     .bind(this)
     .then(function(result) {
 		t1 = performance.now();
-		console.log("Search using multiple requests elapsed: " + (t1 - t0) + " milliseconds.")
-        console.log("Total results: " + result.length);
+        output.innerHTML += "Search using multiple requests elapsed: " + (t1 - t0) + " milliseconds.<br />";
+        output.innerHTML +=" Total results: " + result.length + "<br /><br />";
     })
 	.then(function(result) {
 		t2 = performance.now();
@@ -46,8 +46,8 @@
 		.bind(this)
 		.then(function(result) {
 			t3 = performance.now();
-			console.log("Search using least requests elapsed: " + (t3 - t2) + " milliseconds.")
-			console.log("Total results: " + result.length);
+            output.innerHTML += "Search using least requests elapsed: " + (t3 - t2) + " milliseconds.<br />";
+            output.innerHTML +=" Total results: " + result.length + "<br /><br />";
 		});
 	})
 	.then(function(result) {
@@ -59,9 +59,9 @@
 		})
 		.bind(this)
 		.then(function(result) {
-			t5 = performance.now();
-			console.log("Search using chunked requests elapsed: " + (t5 - t4) + " milliseconds.")
-			console.log("Total results: " + result.length);
+			t5 = performance.now();            
+            output.innerHTML += "Search using chunked requests elapsed: " + (t5 - t4) + " milliseconds.<br />";
+            output.innerHTML +=" Total results: " + result.length + "<br /><br />";
 		});
 	});
 </script>
